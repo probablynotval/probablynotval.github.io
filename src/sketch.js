@@ -13,9 +13,10 @@ const setupNavigation = () => {
     throw new Error("navList is null");
   }
 
-  navButton.innerHTML = navList.classList.contains("collapsed")
-    ? ICONS.MENU_OPEN
-    : ICONS.MENU_CLOSED;
+  const isCollapsed = navList.classList.contains("collapsed");
+  navButton.innerHTML = isCollapsed ? ICONS.MENU_OPEN : ICONS.MENU_CLOSED;
+  navButton.ariaLabel = isCollapsed ? "Open navigation menu" : "Close navigation menu";
+  navButton.ariaExpanded = String(!isCollapsed);
 
   navButton.addEventListener("click", onNavButtonClick);
 };
