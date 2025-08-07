@@ -1,23 +1,44 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game</title>
-  <style>
-    body {
-      padding: 0;
-      margin: 0;
-      background-color: #1b1b1b;
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Case study 2: Data visualisation</title>
+  <!-- To avoid white flashing on cached dark theme -->
+  <script>
+    if (window.localStorage.getItem("theme") === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+      document.documentElement.classList.add("no-transitions");
     }
-  </style>
-  <script src="./p5.min.js"></script>
-  <script src="./p5.sound.min.js"></script>
-  <script type="module" crossorigin src="/assets/main.B4SstLHQ.js"></script>
+  </script>
+
+  <link rel="stylesheet" href="lib/nouislider.css">
+  <!-- We override the nouislider styles  -->
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    document.documentElement.classList.remove("no-transitions");
+  </script>
+
+  <script type="module" src="src/sketch.js"></script>
 </head>
 
 <body>
-  <main>
+  <header class="main-header">
+    <div class="header-container">
+      <nav>
+        <ul class="navbar-list collapsed"></ul>
+      </nav>
+      <div class="header-menu">
+        <button class="theme-toggle-btn" type="button" aria-label="Toggle theme" data-theme-toggle></button>
+        <button class="navbar-btn" type="button" aria-label="Toggle menu"></button>
+      </div>
+    </div>
+  </header>
+  <main class="main-content">
+    <div class="chart-container">
+    </div>
   </main>
 </body>
 
