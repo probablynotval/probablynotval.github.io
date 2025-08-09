@@ -17,13 +17,17 @@ export const setupGallery = () => {
   const padding = 35;
   const animationCycle = 40 * (prefersReducedMotion() ? 0 : 1);
 
-  gallery.addChart(climateChange(container, dimensions, padding, animationCycle));
-  gallery.addChart(payGap(container, dimensions, padding, animationCycle));
-  gallery.addChart(payGapByJob(container, dimensions, padding, animationCycle));
-  gallery.addChart(
+  const charts = [
+    climateChange(container, dimensions, padding, animationCycle),
+    payGap(container, dimensions, padding, animationCycle),
+    payGapByJob(container, dimensions, padding, animationCycle),
     techDiversityGender(container, { ...dimensions, height: 768 }, padding, animationCycle),
-  );
-  gallery.addChart(techDiversityRace(container, { ...dimensions, width: 720 }, animationCycle));
+    techDiversityRace(container, { ...dimensions, width: 720 }, animationCycle),
+  ];
+
+  for (const chart of charts) {
+    gallery.addChart(chart);
+  }
 
   return gallery;
 };

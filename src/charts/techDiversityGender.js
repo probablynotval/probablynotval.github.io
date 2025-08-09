@@ -13,10 +13,10 @@ export const techDiversityGender = (parent, dimensions, padding, animationCycle)
   const rowSpacing = 8;
   const labelPadding = 5;
 
-  const mapPercentToWidth = (percent, layout) =>
+  const percentToWidth = (percent, layout) =>
     math.map(percent, 0, 100, 0, plotWidth(layout) - margin * 2);
 
-  const colorFromPercent = (value) => {
+  const percentToColor = (value) => {
     const { lightness: l0, chroma: c0, hue: h0 } = COLOR.lavender();
     const { lightness: l1, chroma: c1, hue: h1 } = COLOR.flamingo();
 
@@ -77,7 +77,7 @@ export const techDiversityGender = (parent, dimensions, padding, animationCycle)
         }));
 
         const lineHeight = (plotHeight(layout) - rowSpacing * (rows.length - 1)) / rows.length;
-        const rectWidth = mapPercentToWidth(100, layout);
+        const rectWidth = percentToWidth(100, layout);
 
         const xLeft = layout.leftEdge + margin;
         const xRight = layout.rightEdge - margin;
@@ -159,8 +159,8 @@ export const techDiversityGender = (parent, dimensions, padding, animationCycle)
             textAlphas[i] = math.lerp(textAlpha, 1, easedFactor);
           }
 
-          const femaleWidth = mapPercentToWidth(female, layout);
-          const maleWidth = mapPercentToWidth(male, layout);
+          const femaleWidth = percentToWidth(female, layout);
+          const maleWidth = percentToWidth(male, layout);
 
           const rectRadius = lineHeight / 2.25;
           const rectRadii = [0, rectRadius, rectRadius, 0];
@@ -252,7 +252,7 @@ export const techDiversityGender = (parent, dimensions, padding, animationCycle)
         dataMap.set("Female", fmt.percent(femalePercent));
         dataMap.set("Male", fmt.percent(malePercent));
 
-        const tooltipColor = color.oklch(colorFromPercent(malePercent));
+        const tooltipColor = color.oklch(percentToColor(malePercent));
 
         return {
           hoveredPoint,

@@ -20,9 +20,14 @@ export class Chart {
   #htmlElements = [];
   #timekeeper = new ChartTimekeeper();
   #tooltip = new ChartTooltip();
+  #loaded = false;
 
   get name() {
     return this.#options.name;
+  }
+
+  get loaded() {
+    return this.#loaded;
   }
 
   constructor(parent, opts) {
@@ -62,6 +67,8 @@ export class Chart {
 
     // Call after hook to ensure it's the last element.
     this.#htmlElements.push(this.#tableDetails);
+
+    this.#loaded = true;
   }
 
   setup(id) {
@@ -401,10 +408,7 @@ class ChartTooltip {
       const x = math.mapFrom(easedProgress, this.#start.x, finalTarget.x);
       const y = math.mapFrom(easedProgress, this.#start.y, finalTarget.y);
 
-      this.#tooltip({
-        ...tooltip,
-        pos: cartesian(x, y),
-      });
+      this.#tooltip({ ...tooltip, pos: cartesian(x, y) });
 
       if (easedProgress === 1) {
         this.#last = cartesian(x, y);
